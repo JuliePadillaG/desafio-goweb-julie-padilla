@@ -2,8 +2,7 @@ package handler
 
 import (
 	"net/http"
-
-	"desafio-go-web/internal/tickets"
+	"desafio-goweb-julie-padilla/internal/tickets"
 	"github.com/gin-gonic/gin"
 )
 
@@ -17,12 +16,12 @@ func NewService(s tickets.Service) *Service {
 	}
 }
 
-func (s *Service) GetTicketsByCountry() gin.HandlerFunc {
+func (s *Service) GetTicketByCountry() gin.HandlerFunc {
 	return func(c *gin.Context) {
 
 		destination := c.Param("dest")
 
-		tickets, err := s.service.GetTotalTickets(c, destination)
+		tickets, err := s.service.GetTicketByCountry(c, destination)
 		if err != nil {
 			c.String(http.StatusInternalServerError, err.Error(), nil)
 			return
@@ -32,17 +31,17 @@ func (s *Service) GetTicketsByCountry() gin.HandlerFunc {
 	}
 }
 
-func (s *Service) AverageDestination() gin.HandlerFunc {
-	return func(c *gin.Context) {
+// func (s *Service) AverageDestination() gin.HandlerFunc {
+// 	return func(c *gin.Context) {
 
-		destination := c.Param("dest")
+// 		destination := c.Param("dest")
 
-		avg, err := s.service.AverageDestination(c, destination)
-		if err != nil {
-			c.String(http.StatusInternalServerError, err.Error(), nil)
-			return
-		}
+// 		avg, err := s.service.AverageDestination(c, destination)
+// 		if err != nil {
+// 			c.String(http.StatusInternalServerError, err.Error(), nil)
+// 			return
+// 		}
 
-		c.JSON(200, avg)
-	}
-}
+// 		c.JSON(200, avg)
+// 	}
+// }

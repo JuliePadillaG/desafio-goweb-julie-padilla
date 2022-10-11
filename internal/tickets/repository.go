@@ -3,12 +3,13 @@ package tickets
 import (
 	"context"
 	"fmt"
-
+	"desafio-goweb-julie-padilla/internal/domain"
 )
 
 type Repository interface {
 	GetAll(ctx context.Context) ([]domain.Ticket, error)
-	GetTicketByDestination(ctx context.Context, destination string) ([]domain.Ticket, error)
+	GetTicketByCountry(ctx context.Context, destination string) ([]domain.Ticket, error)
+	//AverageDestination(ctx context.Context, destination string) ([]domain.Ticket, error)
 }
 
 type repository struct {
@@ -30,7 +31,7 @@ func (r *repository) GetAll(ctx context.Context) ([]domain.Ticket, error) {
 	return r.db, nil
 }
 
-func (r *repository) GetTicketByDestination(ctx context.Context, destination string) ([]domain.Ticket, error) {
+func (r *repository) GetTicketByCountry(ctx context.Context, destination string) ([]domain.Ticket, error) {
 
 	var ticketsDest []domain.Ticket
 
@@ -46,3 +47,14 @@ func (r *repository) GetTicketByDestination(ctx context.Context, destination str
 
 	return ticketsDest, nil
 }
+
+// func (r *repository) AverageDestination(ctx context.Context, destination string) ([]domain.Ticket, error) {
+
+// 	var ticketsDest []domain.Ticket
+// 	var sum = 0
+// 	var avg = 0
+	
+// 	for index, value := range ticketsDest {
+// 		sum += int(value.Time)
+// 	}
+// }
